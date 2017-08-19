@@ -23,7 +23,9 @@ and what you should write is the sayHi function that makes the code above work,
 // 1. Write a function called first that returns the first item of the array using a callback function
 
   // Code Here
-
+function first(array, callback) {
+  callback(array[0]);
+}
   
 var names = ['Tyler', 'Cahlan', 'Ryan', 'Colt', 'Tyler', 'Blaine', 'Cahlan'];
 first(names, function(firstName){
@@ -36,8 +38,9 @@ first(names, function(firstName){
 // 2. Write a function called last which returns the last item of the array using a callback function.
 
   //Code Here
-
-
+function last(array, callback) {
+  callback(array[array.length - 1]);
+}
 
 last(names, function(lastName){
   console.log('The last name in names is ' + lastName);
@@ -49,7 +52,10 @@ last(names, function(lastName){
 // 3. Write a function called multiply that multiplies two numbers. Invoke the callback with the result of the multiplication. 
 
   //Code Here
-
+function multiply(num1, num2, callback) {
+  var total = num1 * num2;
+  callback(total);
+}
 
 
 multiply(4, 3, function(answer){
@@ -63,9 +69,15 @@ multiply(4, 3, function(answer){
 // If the name does not exist, invoke the callback with false as an argument.
 
   //Code Here 
-
-
-
+function contains(array, name, callback) {
+ for (var i=0; i < array.length; i++) {
+   if (array[i] == name) {
+    callback(true);
+   } else {
+    callback(false);
+   }
+  }
+}
 
 contains(names, 'Colt', function(result){
   if(result === true){
@@ -81,7 +93,12 @@ contains(names, 'Colt', function(result){
 // Invoke the callback with the modified array as an argument.
 
   //Code Here
-
+function uniq(names, callback) {
+  names = names.reverse().filter(function (e, i, arr) {
+    return names.indexOf(e, i+1) === -1;
+    }).reverse();
+  callback(names);
+}
 
 
 uniq(names, function(uniqArr){
@@ -92,7 +109,12 @@ uniq(names, function(uniqArr){
 // 6. Write a function called each that takes in an array of names. For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
 
     //Code Here 
-
+function each(names, callback) {
+  var index = 1;
+  for (var i=0; i<names.length; i++) {
+    callback(names[i], index);
+  }
+}
 
 
 each(names, function(item, indice){
@@ -105,7 +127,13 @@ each(names, function(item, indice){
 // When the correct user object is found, invoke the callback with the user object as an argument.
 
 // Code here
-
+function getUserById(users, id, callback) {
+  for (var i=0; i<users.length; i++) {
+    if (id == users[i].id) {
+      callback(users[i]);
+    }
+  }
+}
 
 
 var users = [
